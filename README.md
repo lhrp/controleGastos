@@ -17,6 +17,6 @@ Projeto em Python, utilizando Streamlit e SQLite para gestão de gastos mensais.
 | Tabela            | Model | Controller |
 | ---------         | :---: | :---:      |
 | tbTipoPagamento   |  ✅   |  ✅       |
-| tbMesAnoPagamento |  🔄   |🔄         |
-| tbPagamento       |  🔄   |🔄         |
+| tbMesAnoPagamento |  ✅   |  ✅       |
+| tbPagamento       |  ✅   |  ✅       |
 | tbValorPagamento  |  🔄   |🔄         |

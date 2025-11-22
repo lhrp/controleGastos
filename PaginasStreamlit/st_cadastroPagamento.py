@@ -19,7 +19,7 @@ tiposPagamento = funcoesTipoPagamento.get("listar")(codigo_usuario)
 if not tiposPagamento:
     st.warning("⚠️ Você precisa cadastrar pelo menos um tipo de pagamento antes de cadastrar pagamentos!")
     if st.button("➕ Cadastrar Tipo de Pagamento"):
-        st.switch_page("PaginasStreamlit/st_cadastroTipoPagamento.py")
+        st.switch_page("PaginasStreamlit/st_tipoPagamento.py")
     st.stop()
 
 # Formulário de cadastro

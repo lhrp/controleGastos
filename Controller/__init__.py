@@ -25,6 +25,7 @@ funcoesMesAnoPagamento = {
 funcoesPagamento = {
     "cadastrar" : pagamento().cadastrarPagamento,
     "listar" : pagamento().listarPagamentos,
+    "consultarPagamentoPorCodigo" : pagamento().consultarPagamentoPorCodigo,
     "atualizar" : pagamento().atualizarPagamento,
     "remover" : pagamento().removerPagamento
 }

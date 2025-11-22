@@ -55,6 +55,7 @@ def consultarMesAnoPagamento(vencimento: date, codigoUsuario: int) -> int:
 class pagamento():
     def __init__(self):
         self.descricaoPagamento = None
+        self.detalhamentoPagamento = None
         self.codigoTipoPagamento = None
         self.codigoMesAnoPagamento = None
         self.vencimentoPagamento = None
@@ -64,12 +65,13 @@ class pagamento():
     
     def cadastrarPagamento(self, 
                            codigoUsuario: int,
-                           descricaoPagamento: str, 
+                           descricaoPagamento: str,
                            codigoTipoPagamento: int, 
                            valorPagamento: float, 
                            vencimentoPagamento: date = datetime.now().date(),
                            numeroParcelaPagamento: int = 1, 
-                           statusPagamento: bool = False
+                           statusPagamento: bool = False,
+                           detalhamentoPagamento: str = None,
                           ) -> dict:
         sessao = sessaoLocal()
         try:
@@ -81,12 +83,14 @@ class pagamento():
                     codigoTipoPagamento=codigoTipoPagamento,
                     valorPagamento=valorPagamento,
                     vencimentoPagamento=vencimentoPagamento,
-                    statusPagamento=statusPagamento
+                    statusPagamento=statusPagamento,
+                    detalhamentoPagamento=detalhamentoPagamento
                 )
             
             novoPagamento = tbPagamento()
             novoPagamento.codigoUsuario = codigoUsuario
             novoPagamento.descricaoPagamento = descricaoPagamento
+            novoPagamento.detalhamentoPagamento = detalhamentoPagamento
             novoPagamento.codigoTipoPagamento = codigoTipoPagamento
             
             novoPagamento.vencimentoPagamento = conversaoParaDate(vencimentoPagamento)
@@ -114,6 +118,7 @@ class pagamento():
                 "mensagem": "Pagamento cadastrado com sucesso.",
                 "codigoPagamento": novoPagamento.codigoPagamento,
                 "descricaoPagamento": novoPagamento.descricaoPagamento,
+                "detalhamentoPagamento": novoPagamento.detalhamentoPagamento,
                 "codigoTipoPagamento": novoPagamento.codigoTipoPagamento,
                 "codigoMesAnoPagamento": novoPagamento.codigoMesAnoPagamento,
                 "vencimentoPagamento": novoPagamento.vencimentoPagamento,
@@ -141,7 +146,8 @@ class pagamento():
                                codigoTipoPagamento: int,
                                valorPagamento: float,
                                vencimentoPagamento: date = datetime.now().date(),
-                               statusPagamento: bool = False
+                               statusPagamento: bool = False,
+                               detalhamentoPagamento: str = None,
                               ) -> dict:
         from Controller import funcoesMesAnoPagamento
         
@@ -180,6 +186,7 @@ class pagamento():
                     novoPagamento = tbPagamento()
                     novoPagamento.codigoUsuario = codigoUsuario
                     novoPagamento.descricaoPagamento = descricaoPagamento
+                    novoPagamento.detalhamentoPagamento = detalhamentoPagamento
                     novoPagamento.codigoTipoPagamento = codigoTipoPagamento
                     novoPagamento.vencimentoPagamento = data_vencimento_mes
                     novoPagamento.codigoMesAnoPagamento = ma.get('codigoMesAnoPagamento')
@@ -239,6 +246,7 @@ class pagamento():
                 "codigoPagamento": p.codigoPagamento,
                 "codigoUsuario": p.codigoUsuario,
                 "descricaoPagamento": p.descricaoPagamento,
+                "detalhamentoPagamento": p.detalhamentoPagamento,
                 "codigoTipoPagamento": p.codigoTipoPagamento,
                 "codigoMesAnoPagamento": p.codigoMesAnoPagamento,
                 "valorPagamento": p.valorPagamento,
@@ -274,6 +282,7 @@ class pagamento():
                     "codigoPagamento": pagamento.codigoPagamento,
                     "codigoUsuario": pagamento.codigoUsuario,
                     "descricaoPagamento": pagamento.descricaoPagamento,
+                    "detalhamentoPagamento": pagamento.detalhamentoPagamento,
                     "codigoTipoPagamento": pagamento.codigoTipoPagamento,
                     "codigoMesAnoPagamento": pagamento.codigoMesAnoPagamento,
                     "valorPagamento": pagamento.valorPagamento,
@@ -304,6 +313,7 @@ class pagamento():
                           codigoPagamento: int,
                           codigoUsuario: int,
                           descricaoPagamento: str = None,
+                          detalhamentoPagamento: str = None,
                           codigoTipoPagamento: int = None,
                           valorPagamento: float = None,
                           vencimentoPagamento: date = None,
@@ -325,6 +335,8 @@ class pagamento():
             
             if descricaoPagamento is not None:
                 pagamento.descricaoPagamento = descricaoPagamento
+            if detalhamentoPagamento is not None:
+                pagamento.detalhamentoPagamento = detalhamentoPagamento
             if codigoTipoPagamento is not None:
                 pagamento.codigoTipoPagamento = codigoTipoPagamento
             if valorPagamento is not None:

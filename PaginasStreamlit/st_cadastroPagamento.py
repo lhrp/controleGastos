@@ -25,6 +25,8 @@ if not tiposPagamento:
 # Formulário de cadastro
 descricaoPagamento = st.text_input("Descrição do Pagamento", max_chars=100)
 
+detalhamentoPagamento = st.text_area("Detalhamento do Pagamento (opcional)", max_chars=1000, height=100)
+
 # Selectbox de tipos
 opcoes_tipos = {tp['codigoTipoPagamento']: f"{tp['nomeTipoPagamento']} ({'Receita' if tp['opcaoTipoPagamento'] == 1 else 'Despesa'})" 
                 for tp in tiposPagamento}
@@ -96,6 +98,7 @@ if btn_cadastrar:
                 resultado = funcoesPagamento.get("cadastrar")(
                     codigoUsuario=codigo_usuario,
                     descricaoPagamento=f"{descricaoPagamento} - Parcela {i+1}/{numeroParcelas}",
+                    detalhamentoPagamento=detalhamentoPagamento,
                     codigoTipoPagamento=codigoTipoPagamento,
                     valorPagamento=valor_parcela,
                     vencimentoPagamento=data_vencimento,
@@ -118,6 +121,7 @@ if btn_cadastrar:
             resultado = funcoesPagamento.get("cadastrar")(
                 codigoUsuario=codigo_usuario,
                 descricaoPagamento=descricaoPagamento,
+                detalhamentoPagamento=detalhamentoPagamento,
                 codigoTipoPagamento=codigoTipoPagamento,
                 valorPagamento=valorPagamento,
                 vencimentoPagamento=vencimentoPagamento,
@@ -150,7 +154,7 @@ if pagamentos:
     import pandas as pd
     
     # Pegar apenas os 10 próximos
-    ultimos_pagamentos = pagamentos[10:]
+    ultimos_pagamentos = pagamentos[1:]
     
     dados_exibicao = []
     for pag in ultimos_pagamentos:
@@ -162,6 +166,7 @@ if pagamentos:
         
             dados_exibicao.append({
                 'Descrição': pag['descricaoPagamento'],
+                # 'Detalhamento': pag['detalhamentoPagamento'] if pag['detalhamentoPagamento'] else 'N/A',
                 'Tipo': tipo['nomeTipoPagamento'] if tipo else 'N/A',
                 'Valor': f"R$ {pag['valorPagamento']:,.2f}",
                 'Vencimento': pag['vencimentoPagamento'].strftime("%d/%m/%Y"),

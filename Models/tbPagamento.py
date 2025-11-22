@@ -20,6 +20,7 @@ class tbPagamento(Base):
     codigoTipoPagamento = Column(Integer, ForeignKey('tbTipoPagamento.codigoTipoPagamento'), nullable=False)
     codigoMesAnoPagamento = Column(Integer, ForeignKey('tbMesAnoPagamento.codigoMesAnoPagamento'), nullable=False)
     descricaoPagamento = Column(String(100), nullable=False)
+    detalhamentoPagamento = Column(String(1000), nullable=True)
     valorPagamento = Column(Float, nullable=False)
     vencimentoPagamento = Column(Date, nullable=False)
     numeroParcelaPagamento = Column(Integer, default=1)

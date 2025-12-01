@@ -22,10 +22,10 @@ with tab_login:
         senha_login = st.text_input("Senha", type="password", key="senha_login")
         
         col1, col2 = st.columns(2)
-        with col1:
-            btn_login = st.form_submit_button("🔓 Entrar", width="stretch", type="primary")
-        with col2:
-            btn_esqueci_senha = st.form_submit_button("❓ Esqueci minha senha", width="stretch")
+        # with col1:
+        btn_login = st.form_submit_button("🔓 Entrar", width="stretch", type="primary")
+        # with col2:
+        #     btn_esqueci_senha = st.form_submit_button("❓ Esqueci minha senha", width="stretch")
         
         if btn_login:
             if not email_login or not senha_login:
@@ -45,8 +45,8 @@ with tab_login:
                 else:
                     st.error(resultado.get("mensagem"))
         
-        if btn_esqueci_senha:
-            st.info("Em desenvolvimento. Entre em contato com o suporte.")
+        # if btn_esqueci_senha:
+        #     st.info("Em desenvolvimento. Entre em contato com o suporte.")
 
 # TAB CADASTRO
 with tab_cadastro:

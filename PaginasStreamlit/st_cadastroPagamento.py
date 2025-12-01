@@ -143,39 +143,39 @@ if btn_cadastrar:
 if btn_limpar:
     st.rerun()
 
-st.divider()
+# st.divider()
 
-# Listar próximos pagamentos do usuário
-st.subheader("💳 Meus Próximos Pagamentos")
+# # Listar próximos pagamentos do usuário
+# st.subheader("💳 Meus Próximos Pagamentos")
 
-pagamentos = funcoesPagamento.get("listar")(codigo_usuario)
+# pagamentos = funcoesPagamento.get("listar")(codigo_usuario)
 
-if pagamentos:
-    import pandas as pd
+# if pagamentos:
+#     import pandas as pd
     
-    # Pegar apenas os 10 próximos
-    ultimos_pagamentos = pagamentos[1:]
+#     # Pegar apenas os 10 próximos
+#     ultimos_pagamentos = pagamentos[1:]
     
-    dados_exibicao = []
-    for pag in ultimos_pagamentos:
-        tipo = next((t for t in tiposPagamento if t['codigoTipoPagamento'] == pag['codigoTipoPagamento']), None)
+#     dados_exibicao = []
+#     for pag in ultimos_pagamentos:
+#         tipo = next((t for t in tiposPagamento if t['codigoTipoPagamento'] == pag['codigoTipoPagamento']), None)
 
-        ## Filtrando os pagamentos pendentes
+#         ## Filtrando os pagamentos pendentes
 
-        if not pag['statusPagamento']:
+#         if not pag['statusPagamento']:
         
-            dados_exibicao.append({
-                'Descrição': pag['descricaoPagamento'],
-                # 'Detalhamento': pag['detalhamentoPagamento'] if pag['detalhamentoPagamento'] else 'N/A',
-                'Tipo': tipo['nomeTipoPagamento'] if tipo else 'N/A',
-                'Valor': f"R$ {pag['valorPagamento']:,.2f}",
-                'Vencimento': pag['vencimentoPagamento'].strftime("%d/%m/%Y"),
-                # Mantendo o status, para caso o pagamento tenha sido feito, 
-                # o usuário identificar que não alterou seu status
-                'Status': '✅ Pago' if pag['statusPagamento'] else '⏳ Pendente'
-            })
+#             dados_exibicao.append({
+#                 'Descrição': pag['descricaoPagamento'],
+#                 # 'Detalhamento': pag['detalhamentoPagamento'] if pag['detalhamentoPagamento'] else 'N/A',
+#                 'Tipo': tipo['nomeTipoPagamento'] if tipo else 'N/A',
+#                 'Valor': f"R$ {pag['valorPagamento']:,.2f}",
+#                 'Vencimento': pag['vencimentoPagamento'].strftime("%d/%m/%Y"),
+#                 # Mantendo o status, para caso o pagamento tenha sido feito, 
+#                 # o usuário identificar que não alterou seu status
+#                 'Status': '✅ Pago' if pag['statusPagamento'] else '⏳ Pendente'
+#             })
     
-    df = pd.DataFrame(dados_exibicao)
-    st.dataframe(df, width="stretch", hide_index=True)
-else:
-    st.info("Nenhum pagamento cadastrado ainda.")
+#     df = pd.DataFrame(dados_exibicao)
+#     st.dataframe(df, width="stretch", hide_index=True)
+# else:
+#     st.info("Nenhum pagamento cadastrado ainda.")

@@ -6,6 +6,15 @@ from types import SimpleNamespace
 import streamlit as st
 import pandas as pd
 
+def conversaoParaDate(data) -> date:
+    if isinstance(data, date):
+        return data
+    elif isinstance(data, datetime):
+        return data.date()
+    elif isinstance(data, str):
+        return datetime.strptime(data, "%Y-%m-%d").date()
+    return data
+
 # Verificar autenticação
 verificar_autenticacao()
 
@@ -205,7 +214,8 @@ if 'pagamento_edicao' in st.session_state:
         
         with col_form2:
             # Converter string de data para objeto date
-            vencimento_atual = datetime.strptime(pag_edit['vencimentoPagamento'], "%Y-%m-%d").date()
+            vencimento_atual = conversaoParaDate(pag_edit['vencimentoPagamento'])
+            # vencimento_atual = datetime.strptime(pag_edit['vencimentoPagamento'], "%Y-%m-%d").date()
             
             vencimento_edit = st.date_input(
                 "📅 Data de Vencimento*",
@@ -248,7 +258,7 @@ if 'pagamento_edicao' in st.session_state:
             
             observacoes_edit = st.text_area(
                 "📄 Observações",
-                value=pag_edit.get('observacoesPagamento', '') or '',
+                value=pag_edit.get('detalhamentoPagamento', '') or '',
                 max_chars=500,
                 height=100
             )
@@ -290,16 +300,16 @@ if 'pagamento_edicao' in st.session_state:
                     valorPagamento=valor_edit,
                     vencimentoPagamento=vencimento_edit,
                     statusPagamento=status_edit,
-                    codigoMesAnoPagamento=mes_ano_edit,
+                    # codigoMesAnoPagamento=mes_ano_edit,
                     numeroParcelaPagamento=parcela_edit,
-                    observacoesPagamento=observacoes_edit if observacoes_edit else None
+                    detalhamentoPagamento=observacoes_edit if observacoes_edit else None
                 )
                 
                 if resultado.get("status") == "SUCESSO":
                     st.success("✅ Pagamento atualizado com sucesso!")
                     del st.session_state.pagamento_edicao
                     st.balloons()
-                    st.rerun()
+                    # st.rerun()
                 else:
                     st.error(f"❌ {resultado.get('mensagem', 'Erro ao atualizar')}")
         

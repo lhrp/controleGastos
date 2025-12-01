@@ -340,7 +340,7 @@ class pagamento():
             if codigoTipoPagamento is not None:
                 pagamento.codigoTipoPagamento = codigoTipoPagamento
             if valorPagamento is not None:
-                pagamento.valorPagamento = valorPagamento
+                pagamento.valorPagamento = valorPagamento            
             if vencimentoPagamento is not None:
                 pagamento.vencimentoPagamento = conversaoParaDate(vencimentoPagamento)
                 pagamento.codigoMesAnoPagamento = consultarMesAnoPagamento(

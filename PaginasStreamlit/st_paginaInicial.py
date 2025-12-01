@@ -15,7 +15,7 @@ st.set_page_config(layout="wide", page_title="Dashboard - Controle de Gastos")
 # Header com nome do usuário e botão de logout
 col_header1, col_header2 = st.columns([4, 1])
 with col_header1:
-    st.header(f"Dashboard - Bem-vindo(a), {st.session_state.nomeUsuario}!")
+    st.header(f"Dashboard")# - Bem-vindo(a), {st.session_state.nomeUsuario}!")
 with col_header2:
     if st.button("🚪 Sair"):
         logout()
